@@ -1,0 +1,85 @@
+ 
+ This small library is thought to obtain as much data possible from wikipedia related articles, for any topic of our interest. 
+ Basically, you can store the text of  the top x pages of wikipedia related to a particular keyword in csv or text format.  
+ 
+ 
+## Documentation of the official library used
+
+Here you can understand better the  wikipedia library sintax , to help you understand better the used code:
+
+ https://wikipedia.readthedocs.io/en/latest/code.html#api
+https://wikipedia.readthedocs.io/en/latest/quickstart.html
+ 
+ 
+##How this library works
+
+This is , in general terms the purpose of the library, how it essentially works: 
+
+For a given keyword in the form of string, the functions will retrieve  a list of 10 ( by default ) or more result pages titles of the wikipedia search engine for that given string, it will then extract through a loop , the pages related to those titles and place the data either on one csv or text file, or one csv and text file for each page analyzed depending of the function. The perfect example to understand the process and how the code works is the 'Searchwiki to csv function' file, as it is where the code is explained in the most detail. All other functions are slight variations of this one. 
+
+
+## Preparing the repository for use:  
+
+1) Basically, just have to install the libraries specified on instalationfile.sh 
+
+Essentially, you will install pandas, numpy and the most important one, wikipedia python library.
+
+
+2) After installing wikipedia, you will need to enter inside one of the files, and do a slight modification to the code, as it has lost support and there is a small glitched that is easily fixed. 
+
+Basically enter the dist-packages directory, and edit the wikipedia file the absolute path will look something like this
+
+'/usr/local/lib/python3.6/dist-packages/wikipedia'
+
+
+You only have to change the line 389, replace the default  <lis = BeautifulSoup(html).find_all('li')>
+With the <lis = BeautifulSoup(html, 'html.parser').find_all('li')>  to avoid the error.
+
+There is a github thread exploring this in detail here : https://github.com/goldsmith/Wikipedia/commit/50bc236836dc20546af61ea7ca6198c3f039a816
+ 
+3) Make sure to change, in all the functions, when using them, the 'path' variable to that path that suits your purposes. 
+
+
+##The functions that we have are the following files :
+
+'Searchwiki to csv function' : for a keyword, it extract 10 or more pages sentences, and place them in csv files. One for each
+of the pages studied for that keyword.
+
+'Searchwiki_to_csv_onefile' : Like the last file, but, instead of producing one document per page, it will place all the data in 
+one unique csv file
+
+
+'Searchwiki_to_text function' : Like  'Searchwiki to csv function' but placing the data in text files.
+
+'Searchwiki_to_text_onefile' : Like Searchwiki_to_csv_onefile but placing the data in one text file.
+
+'Searchwikifor_numbers_to_csv_onefile' : Like 'Searchwiki_to_csv_onefile'  , but it only places in the csv file those sentences
+in the wikipedia pages that have numbers on them. It does not store anything without a number in them. 
+ 
+ 
+ 'Input search to csv or text file' : its a function that instead of giving you the top x results  of wikipedia pages content
+  it will instead show you the titles of those pages allowing you to specify through input() which one of them is it that you want the data from. It's to be used in situations where you don't know what possible titles could be found in the wikipedia search engine, but you care for precise data extraction. This will show you the possible titles and ask you to chose one of them. 
+
+
+
+
+##Storage folders:
+
+All the functions produce one or more documents, the storage folders you can see in this library as thought to be the place where to place said documents. In the case of those functions that generate more than one file per call, each call will also generate one directory inside the searchwiki_to_csv_storage_folder or the searchwiki_to_text_storage_folder respectively. 
+
+
+## The DesambiguationError:
+
+
+Sometimes, when placing a string to obtain data from, the possible titles produced by wikipedias .search() function will not be recognized as titles, this is usually caused because the keyword is not recognized by the language used. For this cases, those instances will be ignored, inside the loops. Printing this type of message:
+
+
+" the search object 'stringtosearch' is not recognized by wikipedia as a true            title for this language in its search engine, thus, it was skipped ,             try changing to a language that might recognize it or finding the real title to capture its data"
+
+
+Two possible things can be done in this scenario, if you want to data of that title page. 
+First thing would be to change the language argument in the functions, the slanguage to that one that might include the string you
+are using. For example, searchwiki_to_csv("rosas",10,'es')  will avoid disambiguation errors more easily than searchwiki_to_csv("rosas",10,'es') , because "rosas" will more likely find a page for in the spanish language search, than the english one. If you call both functions, you will see that they both give results, but the first one moves better across all instances.
+
+
+The second possible thing to do, is to use the input search to csv or text function. This function instead of looping through all pages related to a keyword, will ask you to input your keyword and afterwards, show you the title pages printed. Asking you to choose by copy and pasting, that page you want to get the data of. Is a function made to guarantee the extraction of any string. If the titles produced are not effective and generate a desambiguation error anyways, even after changing the language, that means that you need to search the proper keyword for your search because it just does not produce a result in the wikipedia page search. 
