@@ -82,4 +82,18 @@ First thing would be to change the language argument in the functions, the slang
 are using. For example, searchwiki_to_csv("rosas",10,'es')  will avoid disambiguation errors more easily than searchwiki_to_csv("rosas",10,'es') , because "rosas" will more likely find a page for in the spanish language search, than the english one. If you call both functions, you will see that they both give results, but the first one moves better across all instances.
 
 
-The second possible thing to do, is to use the input search to csv or text function. This function instead of looping through all pages related to a keyword, will ask you to input your keyword and afterwards, show you the title pages printed. Asking you to choose by copy and pasting, that page you want to get the data of. Is a function made to guarantee the extraction of any string. If the titles produced are not effective and generate a desambiguation error anyways, even after changing the language, that means that you need to search the proper keyword for your search because it just does not produce a result in the wikipedia page search. 
+The second possible thing to do, is to use the input search to csv or text function. This function instead of looping through  all pages related to a keyword, will ask you to input your keyword and afterwards, show you the title pages printed. Asking you to choose by copy and pasting, that page you want to get the data of. Is a function made to guarantee the extraction of any string. If the titles produced are not effective and generate a desambiguation error anyways, even after changing the language, that means that you need to search the proper keyword for your search because it just does not produce a result in the wikipedia page search. 
+
+
+Finally, the libraries used ad their respective versions, are the following:
+anaconda-client                    1.6.14   
+anaconda-navigator                 1.9.6    
+anaconda-project                   0.8.2   
+wikipedia                          1.4.0    
+Wikipedia-API                      0.3.7   
+pandas                             0.23.4 
+numpy                              1.15.4 
+jupyter                            1.0.0    
+jupyter-client                     5.2.3    
+jupyter-console                    5.2.0    
+jupyter-core                       4.4.0  
